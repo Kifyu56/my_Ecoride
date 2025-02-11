@@ -16,7 +16,7 @@ CREATE TABLE Users (
 
 CREATE TABLE Authentication (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL UNIQUE,
+    user_id INT UNSIGNED NOT NULL UNIQUE,
     username VARCHAR(50) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     last_login DATETIME NULL,
@@ -27,7 +27,7 @@ CREATE TABLE Authentication (
 
 CREATE TABLE Vehicles (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT UNSIGNED NOT NULL,
     brand VARCHAR(50) NOT NULL,
     model VARCHAR(50) NOT NULL,
     color VARCHAR(30) NOT NULL,
@@ -39,8 +39,8 @@ CREATE TABLE Vehicles (
 
 CREATE TABLE Trips (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    driver_id INT NOT NULL,
-    vehicle_id INT NOT NULL,
+    driver_id INT UNSIGNED NOT NULL,
+    vehicle_id INT UNSIGNED NOT NULL,
     origin VARCHAR(255) NOT NULL,
     destination VARCHAR(255) NOT NULL,
     departure_time DATETIME NOT NULL,
@@ -54,19 +54,19 @@ CREATE TABLE Trips (
 );
 
 CREATE TABLE Reservations (
-    user_id INT NOT NULL,
-    trip_id INT NOT NULL,
+    passenger_id INT UNSIGNED NOT NULL,
+    trip_id INT UNSIGNED NOT NULL,
     status ENUM('pending', 'confirmed', 'canceled') DEFAULT 'pending',
     reserved_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (user_id, trip_id),
-    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
+    PRIMARY KEY (passenger_id, trip_id),
+    FOREIGN KEY (passenger_id) REFERENCES Users(id) ON DELETE CASCADE,
     FOREIGN KEY (trip_id) REFERENCES Trips(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Reports (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    trip_id INT NOT NULL,
-    reported_user INT NOT NULL,
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    trip_id INT UNSIGNED NOT NULL,
+    reported_user INT UNSIGNED NOT NULL,
     reason TEXT NOT NULL,
     status ENUM('open', 'resolved', 'rejected') DEFAULT 'open',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -86,7 +86,7 @@ CREATE TABLE Messages (
 );
 
 CREATE TABLE Invitations (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
     role ENUM('employee', 'user') NOT NULL,
     token VARCHAR(255) NOT NULL UNIQUE,
@@ -96,12 +96,13 @@ CREATE TABLE Invitations (
 );
 
 CREATE TABLE Moderation (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    moderator_id INT NOT NULL,
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    moderator_id INT UNSIGNED NOT NULL,
     action ENUM('approved', 'rejected', 'suspended') NOT NULL,
     reason TEXT NULL,
     FOREIGN KEY (moderator_id) REFERENCES Users(id) ON DELETE CASCADE
 );
+
 
 -- NoSQL Collections:
 -- Credits (Managed in NoSQL)
