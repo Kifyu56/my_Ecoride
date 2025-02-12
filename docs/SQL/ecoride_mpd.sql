@@ -103,10 +103,18 @@ CREATE TABLE Invitations (
 CREATE TABLE Moderation (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     moderator_id INT UNSIGNED NOT NULL,
-    action ENUM('approved', 'rejected', 'suspended') NOT NULL,
-    reason TEXT NULL,
-    FOREIGN KEY (moderator_id) REFERENCES Users(id) ON DELETE CASCADE
+    report_id INT UNSIGNED NULL,
+    trip_id INT UNSIGNED NULL,
+    moderation_type ENUM('trip', 'rating', 'report', 'other') NOT NULL CHECK (moderation_type IN ('trip', 'rating', 'report', 'other')),
+    action ENUM('approved', 'rejected', 'pending') DEFAULT 'pending',
+    reason TEXT NOT NULL,
+    moderated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (moderator_id) REFERENCES Users(id) ON DELETE CASCADE,
+    FOREIGN KEY (trip_id) REFERENCES Trips(id) ON DELETE CASCADE,
+    FOREIGN KEY (report_id) REFERENCES Reports(id) ON DELETE CASCADE
 );
+
+
 
 -- NoSQL Collections:
 -- Credits (Managed in NoSQL)

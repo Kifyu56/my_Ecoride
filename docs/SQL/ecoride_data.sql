@@ -36,3 +36,11 @@ INSERT INTO Messages (user_id, first_name, last_name, email, subject, message, s
 INSERT INTO Invitations (email, role, token, status, created_at) VALUES 
 ('new.employee@example.com', 'employee', 'token12345', 'pending', NOW()),
 ('new.user@example.com', 'user', 'token67890', 'pending', NOW());
+
+-- Moderations
+INSERT INTO Moderation (moderator_id, report_id, moderation_type, action, reason) VALUES 
+(2, 1, 'report', 'approved', 'Signalement validé après vérification.');
+
+-- Reports
+INSERT INTO Reports (trip_id, reported_user, reason, status, created_at) VALUES 
+(1, 3, 'dangerous_driving', 'open', NOW());
