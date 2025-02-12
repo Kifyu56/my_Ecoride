@@ -1,0 +1,21 @@
+{
+    "name": "kifyu56/my_ecoride",
+    "description": "Plateforme de covoiturage écologique facilitant les trajets entre utilisateurs.",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Kifyu56\\MyEcoride\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kifyu",
+            "email": "franck.panel56@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

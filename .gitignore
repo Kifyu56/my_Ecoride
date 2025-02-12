@@ -1,4 +1,4 @@
-# Éviter les fichiers de logs
+# Exclure les fichiers de logs
 *.log
 error_log
 debug.log
@@ -11,13 +11,9 @@ config.php
 cache/
 sessions/
 
-# Ignorer les dépendances (si tu utilises Composer)
+# Ignorer les dépendances
 vendor/
 composer.lock
-
-# Ignorer les fichiers de base de données temporaires
-*.sql~
-*.sqlite
 
 # Ignorer les fichiers IDE & éditeurs
 .vscode/
