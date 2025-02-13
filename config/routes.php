@@ -10,7 +10,10 @@ $router = new Router();
  *
  * Chaque route est associée à un contrôleur et une méthode.
  */
-$router->add('home', 'HomeController');  // Route pour la page d'accueil
-$router->add('about', 'AboutController');  // Route pour la page "À propos"
+
+// Définition des routes
+$router->add('', 'HomeController');
+$router->add('home', 'HomeController');
+$router->add('about', 'AboutController');
 
 return $router;

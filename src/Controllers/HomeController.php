@@ -3,12 +3,13 @@
 namespace Src\Controllers;
 
 /**
- * Contrôleur de la page d'accueil.
+ * Contrôleur de la page "Accueil".
  */
+
 class HomeController
 {
     /**
-     * Méthode appelée lorsqu'on visite "/"
+     * Méthode appelée lorsqu'on visite "/" ou "/home"
      */
     public function index()
     {

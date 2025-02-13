@@ -6,11 +6,11 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use Src\Core\Router;
 
-// Récupération de l'URL propre depuis .htaccess
-$url = isset($_GET['url']) ? trim($_GET['url'], '/') : 'home';
-
 // Récupération du routeur
 $router = require_once __DIR__ . '/../config/routes.php';
+
+// Récupérer l'URL proprement
+$url = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
 // Exécution du routeur
 $router->dispatch($url);
