@@ -1,6 +1,6 @@
 <?php
 
-use Kifyu56\MyEcoride\Core\Router;
+use Src\Core\Router;
 
 // Création d'une instance du routeur
 $router = new Router();
@@ -10,7 +10,7 @@ $router = new Router();
  *
  * Chaque route est associée à un contrôleur et une méthode.
  */
-$router->add('', 'HomeController');  // Route pour la page d'accueil
+$router->add('home', 'HomeController');  // Route pour la page d'accueil
 $router->add('about', 'AboutController');  // Route pour la page "À propos"
 
 return $router;

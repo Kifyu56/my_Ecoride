@@ -1,6 +1,6 @@
 <?php
 
-namespace Kifyu56\MyEcoride\Controllers;
+namespace MyEcoride\Controllers;
 
 class TestController
 {

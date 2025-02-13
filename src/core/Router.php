@@ -1,6 +1,6 @@
 <?php
 
-namespace Kifyu56\MyEcoride\Core;
+namespace Src\Core;
 
 /**
  * Classe Router pour gérer les routes et rediriger vers les bons contrôleurs.
@@ -8,7 +8,7 @@ namespace Kifyu56\MyEcoride\Core;
 class Router
 {
     // Tableau associatif contenant les routes définies
-    private array $routes = []; 
+    private array $routes = [];
 
     /**
      * Ajoute une route à la liste des routes disponibles.
@@ -36,7 +36,7 @@ class Router
         // Vérifie si l'URI correspond à une route enregistrée
         if (isset($this->routes[$uri])) {
             // Construction du nom du contrôleur en utilisant le namespace
-            $controllerName = "Kifyu56\\MyEcoride\\Controllers\\" . $this->routes[$uri]['controller'];
+            $controllerName = "Src\\Controllers\\" . $this->routes[$uri]['controller'];
             $method = $this->routes[$uri]['method'];
 
             // Vérifie si la classe du contrôleur existe
