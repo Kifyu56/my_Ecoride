@@ -1,27 +1,16 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Chargement automatique des classes avec Composer
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// Récupération du routeur depuis le fichier de configuration
+use Src\Core\Router;
+
+// Récupération de l'URL propre depuis .htaccess
+$url = isset($_GET['url']) ? trim($_GET['url'], '/') : 'home';
+
+// Récupération du routeur
 $router = require_once __DIR__ . '/../config/routes.php';
 
-// Dispatcher les routes : analyse l'URL et redirige vers le bon contrôleur
-$router->dispatch($_SERVER['REQUEST_URI']);
-
-?>
-
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-
-</body>
-
-</html>
+// Exécution du routeur
+$router->dispatch($url);

@@ -1,0 +1,1 @@
+<p>&copy; 2025 EcoRide - Tous droits réservés.</p>
