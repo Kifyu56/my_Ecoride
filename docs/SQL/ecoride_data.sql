@@ -42,5 +42,6 @@ INSERT INTO Moderation (moderator_id, report_id, moderation_type, action, reason
 (2, 1, 'report', 'approved', 'Signalement validé après vérification.');
 
 -- Reports
-INSERT INTO Reports (trip_id, reported_user, reason, status, created_at) VALUES 
-(1, 3, 'dangerous_driving', 'open', NOW());
+INSERT INTO Reports (reporter_id, trip_id, reported_user_id, reason, message, status)
+VALUES (1, 3, 4, 'dangerous_driving', 'Le conducteur dépassait toutes les voitures dangereusement.', 'pending');
+

@@ -65,14 +65,18 @@ CREATE TABLE Reservations (
 
 CREATE TABLE Reports (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    trip_id INT UNSIGNED NOT NULL,
-    reported_user INT UNSIGNED NOT NULL,
-    reason TEXT NOT NULL,
-    status ENUM('open', 'resolved', 'rejected') DEFAULT 'open',
+    reporter_id INT UNSIGNED NOT NULL,
+    trip_id INT UNSIGNED NULL,
+    reported_user_id INT UNSIGNED NULL,
+    reason ENUM('dangerous_driving', 'spam', 'other') NOT NULL,
+    message TEXT NOT NULL,
+    status ENUM('pending', 'resolved', 'rejected') DEFAULT 'pending',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (reporter_id) REFERENCES Users(id) ON DELETE CASCADE,
     FOREIGN KEY (trip_id) REFERENCES Trips(id) ON DELETE CASCADE,
-    FOREIGN KEY (reported_user) REFERENCES Users(id) ON DELETE CASCADE
+    FOREIGN KEY (reported_user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
+
 
 CREATE TABLE Messages (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
