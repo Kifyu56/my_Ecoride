@@ -11,7 +11,7 @@ class MessageModel
 
     public function __construct()
     {
-        $this->db = Database::connect();
+        $this->db = Database::getConnection();
     }
 
     /**

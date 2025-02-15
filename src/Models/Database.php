@@ -7,15 +7,19 @@ use PDOException;
 
 require_once __DIR__ . '/../../config/database.php';
 
+/**
+ * Classe Database
+ * Gère la connexion à la base de données en singleton.
+ */
 class Database
 {
     private static ?PDO $pdo = null;
 
-    public static function connect(): PDO
+    public static function getConnection(): PDO
     {
         if (self::$pdo === null) {
             try {
-                $dbConfig = getDatabaseConfig(); // Récupère les paramètres depuis config/database.php
+                $dbConfig = getDatabaseConfig();
 
                 self::$pdo = new PDO(
                     $dbConfig['dsn'],
