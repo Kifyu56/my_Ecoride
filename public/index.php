@@ -23,11 +23,12 @@ $content = $router->dispatch($uri);
 
 <head>
     <?php require_once __DIR__ . "/../src/Views/includes/head.php"; ?>
+    <link rel="stylesheet" href="assets/css/index.css">
 </head>
 
 <body>
 
-    <header>
+    <header class="header">
         <?php require_once __DIR__ . "/../src/Views/includes/header.php"; ?>
     </header>
 

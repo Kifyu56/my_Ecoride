@@ -1,0 +1,40 @@
+/* Import FontAwesome */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+/* Reset général */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Centrer tout le contenu */
+body {
+    width: 95%;
+    max-width: 1200px;
+    /* Pour éviter un écran trop large sur desktop */
+    margin: 0 auto;
+    /* Centre le body */
+}
+
+/* Header styles */
+.header {
+    width: 100%;
+    height: 300px;
+    background: url("../images/header/banniere.webp") no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    position: relative;
+}
+
+/* Footer Styles */
+footer {
+    width: 100%;
+    background: #2d572c;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
