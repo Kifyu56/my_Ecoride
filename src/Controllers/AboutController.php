@@ -13,8 +13,8 @@ class AboutController
      */
     public function index()
     {
-        $title = "À propos"; // Titre de la page
-        $page = "about"; // Nom de la page à charger
-        require_once __DIR__ . "/../Views/includes/layout.php";
+        ob_start();
+        require_once __DIR__ . '/../Views/pages/about.php';
+        return ob_get_clean();
     }
 }

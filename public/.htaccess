@@ -1,9 +1,9 @@
-# Activer le moteur de réécriture
+RewriteBase /my_Ecoride/public/
 RewriteEngine On
 
-# Ne pas réécrire les fichiers et dossiers existants
+# Autoriser toutes les requêtes sauf les fichiers et dossiers existants
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Rediriger toutes les requêtes vers index.php en transmettant l'URL proprement
-RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+# Rediriger toutes les requêtes vers index.php
+RewriteRule ^(.*)$ index.php?page=$1 [QSA,L]

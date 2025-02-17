@@ -2,7 +2,6 @@
 
 namespace Src\Core;
 
-use Src\Core\Layout;
 
 /**
  * Classe Router pour gérer les routes et rediriger vers les bons contrôleurs.
@@ -28,38 +27,30 @@ class Router
      * Analyse l'URI et appelle le contrôleur et la méthode correspondants.
      *
      * @param string $uri L'URI demandée par l'utilisateur.
+     * @return string Le contenu à afficher à l'utilisateur.
      */
-    public function dispatch(string $uri): void
+    public function dispatch(string $uri): string
     {
-        // Nettoyage de l'URI pour éviter les erreurs de formatage
         $uri = trim(parse_url($uri, PHP_URL_PATH), '/');
 
-        // Vérifie si l'URI correspond à une route enregistrée
         if (isset($this->routes[$uri])) {
-            // Construction du nom du contrôleur en utilisant le namespace
             $controllerName = "Src\\Controllers\\" . $this->routes[$uri]['controller'];
             $method = $this->routes[$uri]['method'];
 
-            // Vérifie si la classe du contrôleur existe
             if (class_exists($controllerName)) {
                 $controller = new $controllerName();
 
-                // Vérifie si la méthode demandée existe dans le contrôleur
                 if (method_exists($controller, $method)) {
-                    $content = $controller->$method();
+                    return $controller->$method();
                 } else {
-                    $content = "<h1>Erreur</h1><p>La méthode '$method' n'existe pas.</p>";
+                    return "<h1>Erreur</h1><p>La méthode `$method` n'existe pas.</p>";
                 }
             } else {
-                $content = "<h1>Erreur</h1><p>Le contrôleur '$controllerName' n'existe pas.</p>";
+                return "<h1>Erreur</h1><p>Le contrôleur `$controllerName` n'existe pas.</p>";
             }
         } else {
             http_response_code(404);
-            $content = "<h1>404 - Page non trouvée</h1>";
+            return "<h1>404 - Page non trouvée</h1>";
         }
-
-        // Appel le layout global en passant la variable $content
-        Layout::render($content);
-
     }
 }
