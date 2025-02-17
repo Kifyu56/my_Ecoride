@@ -15,5 +15,8 @@ $router = new Router();
 $router->add('', 'HomeController');
 $router->add('home', 'HomeController');
 $router->add('about', 'AboutController');
+$router->add('contact', 'ContactController');
+$router->add('404', 'Error404Controller', 'notFound');
+
 
 return $router;

@@ -43,14 +43,24 @@ class Router
                 if (method_exists($controller, $method)) {
                     return $controller->$method();
                 } else {
-                    return "<h1>Erreur</h1><p>La méthode `$method` n'existe pas.</p>";
+                    return $this->handle404();
                 }
             } else {
-                return "<h1>Erreur</h1><p>Le contrôleur `$controllerName` n'existe pas.</p>";
+                return $this->handle404();
             }
         } else {
-            http_response_code(404);
-            return "<h1>404 - Page non trouvée</h1>";
+            return $this->handle404();
         }
+    }
+
+    /**
+     * Gère les erreurs 404.
+     *
+     * @return string Le contenu à afficher à l'utilisateur.
+     */
+    private function handle404(): string
+    {
+        $errorController = new \Src\Controllers\Error404Controller();
+        return $errorController->notFound();
     }
 }
