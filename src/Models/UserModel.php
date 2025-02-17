@@ -4,6 +4,7 @@ namespace Src\Models;
 
 use PDO;
 use Src\Models\Database;
+use Src\Helpers\TokenGenerator;
 
 /**
  * Class UserModel
@@ -67,7 +68,7 @@ class UserModel
     }
 
     /**
-     * Crée un utilisateur et enregistre ses identifiants.
+     * Crée un utilisateur et envoie une invitation avec un token.
      *
      * @param string $username Le pseudo.
      * @param string $email L'adresse email.
@@ -87,9 +88,12 @@ class UserModel
             $stmtUser->execute();
             $userId = (int) $this->db->lastInsertId();
 
-            // Étape 2 : Insérer les identifiants dans la table authentication
-            $queryAuth = "INSERT INTO authentication (user_id, email, username, password_hash, ip_address, user_agent) 
-                          VALUES (:user_id, :email, :username, :password, :ip_address, :user_agent)";
+            // Étape 2 : Générer le token d'invitation
+            $token = TokenGenerator::generate();
+
+            // Étape 3 : Insérer les identifiants avec le token d'invitation
+            $queryAuth = "INSERT INTO authentication (user_id, email, username, password_hash, ip_address, user_agent, invitation_token) 
+                      VALUES (:user_id, :email, :username, :password, :ip_address, :user_agent, :token)";
             $stmtAuth = $this->db->prepare($queryAuth);
             $stmtAuth->bindParam(':user_id', $userId, PDO::PARAM_INT);
             $stmtAuth->bindParam(':email', $email, PDO::PARAM_STR);
@@ -97,14 +101,65 @@ class UserModel
             $stmtAuth->bindParam(':password', $password, PDO::PARAM_STR);
             $stmtAuth->bindParam(':ip_address', $ip_address, PDO::PARAM_STR);
             $stmtAuth->bindParam(':user_agent', $user_agent, PDO::PARAM_STR);
+            $stmtAuth->bindParam(':token', $token, PDO::PARAM_STR);
             $stmtAuth->execute();
 
             $this->db->commit();
+
+            // Étape 4 : Envoyer un email avec le lien d'invitation
+            $this->sendInvitationEmail($email, $token);
+
             return $userId;
         } catch (\Exception $e) {
             $this->db->rollBack();
-            return null;
+            die("Erreur lors de la création de l'utilisateur : " . $e->getMessage());
         }
+    }
+
+    /**
+     * Envoie un email avec le lien d'invitation.
+     * 
+     * @param string $email L'adresse email de l'utilisateur.
+     * @param string $token Le token d'invitation.
+     * @return void
+     */
+    private function sendInvitationEmail(string $email, string $token): void
+    {
+        $activationLink = "https://ecoride.com/validate_invitation.php?token=" . $token;
+        $subject = "Activation de votre compte EcoRide";
+        $message = "Bonjour,\n\nVeuillez cliquer sur le lien suivant pour activer votre compte :\n$activationLink\n\nMerci !";
+        $headers = "From: no-reply@ecoride.com";
+
+        mail($email, $subject, $message, $headers);
+    }
+
+    /**
+     * Récupère un utilisateur par son token d'invitation.
+     *
+     * @param string $token Le token d'invitation.
+     * @return array|null Les données de l'utilisateur ou null si inexistant.
+     */
+    public function getUserByToken(string $token): ?array
+    {
+        $query = "SELECT * FROM authentication WHERE invitation_token = :token";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':token', $token, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+
+    /**
+     * Active le compte d'un utilisateur en supprimant son token d'invitation.
+     *
+     * @param int $userId L'ID de l'utilisateur.
+     * @return bool True si l'activation réussit, False sinon.
+     */
+    public function activateUser(int $userId): bool
+    {
+        $query = "UPDATE authentication SET invitation_token = NULL WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        return $stmt->execute();
     }
 
     /**

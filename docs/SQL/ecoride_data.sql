@@ -1,47 +1,58 @@
--- Insertion de données pour la base EcoRide
 
--- Utilisateurs : Admin, Employé, Chauffeur, Passager
-INSERT INTO Users (first_name, last_name, username, email, phone, consent, consent_date) VALUES 
-('José', 'Parrot', 'admin_jose', 'jose.parrot@example.com', '0600000001', TRUE, NOW()),
-('Alain', 'Prost', 'employee_alain', 'alain.prost@example.com', '0600000002', TRUE, NOW()),
-('Jean', 'Dupont', 'jdupont', 'jean.dupont@example.com', '0612345678', TRUE, NOW()),
-('Marie', 'Curie', 'mcurie', 'marie.curie@example.com', '0623456789', TRUE, NOW());
 
--- Authentification des utilisateurs
-INSERT INTO Authentication (user_id, username, password_hash, last_login) VALUES 
-(1, 'admin_jose', '$2y$10$taB6qvW.9eSVG5IHx.1ubO8t1BZAAv.qj9JpbdjhKy8QhuedcGWmu', NOW()),
-(2, 'employee_alain', '$2y$10$I2dqhwM2LEFZ844MAV5RCuDtjPsNWOgVDkuASUmpyzYwe3KAJfW7.', NOW()),
-(3, 'jdupont', '$2y$10$yb63zFXQP2kBw79rVUP5bejeRFg5UZhS00NmNiN84mUghUTmZ95i2', NOW()),
-(4, 'mcurie', '$2y$10$hL1syrvxyCvtuIvcBa01xO.W3JYPngGj/ddRdD6fzAqVcawdgbadG', NOW());
+-- Insérer des utilisateurs
+INSERT INTO users (id, first_name, last_name, role, phone, address, city, postal_code, birth_date, photo, consent, consent_date)
+VALUES
+(1, 'Alice', 'Dupont', 'user', '0601020304', '12 rue de Paris', 'Paris', '75001', '1992-05-14', NULL, TRUE, NOW()),
+(2, 'Bob', 'Martin', 'user', '0611223344', '34 avenue Lyon', 'Lyon', '69001', '1988-09-23', NULL, TRUE, NOW()),
+(3, 'Charlie', 'Lemoine', 'employed', '0622334455', '56 boulevard Nice', 'Nice', '06000', '1990-11-11', NULL, TRUE, NOW()),
+(4, 'David', 'Morel', 'admin', '0633445566', '78 route Marseille', 'Marseille', '13000', '1985-02-02', NULL, TRUE, NOW());
 
--- Véhicules des chauffeurs
-INSERT INTO Vehicles (user_id, brand, model, color, energy_type, plate_number) VALUES 
-(3, 'Tesla', 'Model 3', 'Rouge', 'electric', 'AB-123-CD'),
-(4, 'Renault', 'Zoe', 'Bleu', 'electric', 'CD-456-EF');
+-- Insérer des données d'authentification
+INSERT INTO authentication (user_id, username, email, password_hash, email_verified, verification_token)
+VALUES
+(1, 'aliceD', 'alice@example.com', 'hash1', FALSE, 'token1'),
+(2, 'bobM', 'bob@example.com', 'hash2', FALSE, 'token2'),
+(3, 'charlieL', 'charlie@example.com', 'hash3', TRUE, NULL),
+(4, 'davidAdmin', 'admin@example.com', 'adminhash', TRUE, NULL);
 
--- Trajets disponibles
-INSERT INTO Trips (driver_id, vehicle_id, origin, destination, departure_time, price, max_passengers, eco_friendly) VALUES 
-(3, 1, 'Paris', 'Lyon', '2024-02-15 08:00:00', 30.00, 3, TRUE),
-(4, 2, 'Marseille', 'Nice', '2024-02-16 09:30:00', 25.00, 2, TRUE);
+-- Insérer des véhicules
+INSERT INTO vehicles (id, user_id, type, brand, model, year, color, energy_type, plate_number, registration_date, seats, mobility_restricted, smoker_friendly, pets_allowed)
+VALUES
+(1, 1, 'voiture', 'Renault', 'Clio', 2020, 'Rouge', 'essence', 'AB-123-CD', '2020-06-15', 5, FALSE, FALSE, TRUE),
+(2, 2, 'voiture', 'Tesla', 'Model 3', 2022, 'Noir', 'électrique', 'CD-456-EF', '2022-04-10', 5, FALSE, FALSE, FALSE);
 
--- Réservations
-INSERT INTO Reservations (passenger_id, trip_id, status) VALUES 
-(4, 1, 'confirmed');
+-- Insérer des trajets
+INSERT INTO trips (id, driver_id, vehicle_id, departure_city, departure_address, departure_date, arrival_city, arrival_address, arrival_date, available_seats, price, status, eco_friendly)
+VALUES
+(1, 1, 1, 'Paris', 'Gare du Nord', '2025-03-10 08:00:00', 'Lyon', 'Gare de Lyon', '2025-03-10 12:00:00', 3, 30.50, 'pending', FALSE),
+(2, 2, 2, 'Lyon', 'Place Bellecour', '2025-03-11 09:30:00', 'Marseille', 'Vieux-Port', '2025-03-11 14:30:00', 4, 25.00, 'confirmed', TRUE);
 
--- Messages de contact
-INSERT INTO Messages (user_id, first_name, last_name, email, subject, message, status) VALUES 
-(NULL, 'Paul', 'Durand', 'paul.durand@example.com', 'Problème de réservation', 'Je ne parviens pas à réserver un trajet.', 'pending');
+-- Insérer des réservations
+INSERT INTO reservations (passenger_id, trip_id, status, reserved_at)
+VALUES
+(2, 1, 'confirmed', NOW()),
+(3, 2, 'pending', NOW());
 
--- Invitations en attente
-INSERT INTO Invitations (email, role, token, status, created_at) VALUES 
-('new.employee@example.com', 'employee', 'token12345', 'pending', NOW()),
-('new.user@example.com', 'user', 'token67890', 'pending', NOW());
+-- Insérer des signalements
+INSERT INTO reports (reporter_id, trip_id, reported_user_id, reason, message, status)
+VALUES
+(2, 1, 1, 'dangerous_driving', 'Le conducteur roulait trop vite.', 'pending');
 
--- Moderations
-INSERT INTO Moderation (moderator_id, report_id, moderation_type, action, reason) VALUES 
-(2, 1, 'report', 'approved', 'Signalement validé après vérification.');
+-- Insérer des modérations
+INSERT INTO moderation (moderator_id, report_id, trip_id, moderation_type, action, reason)
+VALUES
+(4, 1, 1, 'report', 'pending', 'Vérification en cours');
 
--- Reports
-INSERT INTO Reports (reporter_id, trip_id, reported_user_id, reason, message, status)
-VALUES (1, 3, 4, 'dangerous_driving', 'Le conducteur dépassait toutes les voitures dangereusement.', 'pending');
+-- Insérer des messages
+INSERT INTO messages (user_id, first_name, last_name, email, subject, message, status)
+VALUES
+(NULL, 'Paul', 'Durand', 'paul.durand@example.com', 'Problème de réservation', 'Je ne parviens pas à réserver un trajet.', 'pending'),
+(1, NULL, NULL, NULL, "Demande d'infos", 'Comment fonctionne votre plateforme ?', 'resolved');
+
+-- Insérer des invitations (confirmation d'email)
+INSERT INTO invitations (user_id, token)
+VALUES
+(1, 'confirmation_token1'),
+(2, 'confirmation_token2');
 

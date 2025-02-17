@@ -1,16 +1,10 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+session_start();
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php'; // Charge toutes les classes
+require_once __DIR__ . '/../config/database.php'; // Connexion BDD
+$router = require_once __DIR__ . '/../config/routes.php'; // Récupère le routeur avec ses routes
 
-use Src\Core\Router;
-
-// Récupération du routeur
-$router = require_once __DIR__ . '/../config/routes.php';
-
-// Récupérer l'URL proprement
-$url = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-
-// Exécution du routeur
-$router->dispatch($url);
+// Récupérer l'URL demandée et l'envoyer au routeur
+$uri = $_GET['page'] ?? '';
+$router->dispatch($uri);

@@ -12,7 +12,7 @@
     </header>
 
     <main>
-        <?php require_once __DIR__ . "/../pages/{$page}.php"; ?>
+        <?= $content ?>
     </main>
 
     <footer>

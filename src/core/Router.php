@@ -2,6 +2,8 @@
 
 namespace Src\Core;
 
+use Src\Core\Layout;
+
 /**
  * Classe Router pour gérer les routes et rediriger vers les bons contrôleurs.
  */
@@ -30,8 +32,7 @@ class Router
     public function dispatch(string $uri): void
     {
         // Nettoyage de l'URI pour éviter les erreurs de formatage
-        $uri = parse_url($uri, PHP_URL_PATH);
-        $uri = trim($uri, '/');
+        $uri = trim(parse_url($uri, PHP_URL_PATH), '/');
 
         // Vérifie si l'URI correspond à une route enregistrée
         if (isset($this->routes[$uri])) {
@@ -45,15 +46,20 @@ class Router
 
                 // Vérifie si la méthode demandée existe dans le contrôleur
                 if (method_exists($controller, $method)) {
-                    $controller->$method();
+                    $content = $controller->$method();
                 } else {
-                    echo "Erreur : La méthode '$method' n'existe pas dans le contrôleur $controllerName.";
+                    $content = "<h1>Erreur</h1><p>La méthode '$method' n'existe pas.</p>";
                 }
             } else {
-                echo "Erreur : Le contrôleur '$controllerName' n'existe pas.";
+                $content = "<h1>Erreur</h1><p>Le contrôleur '$controllerName' n'existe pas.</p>";
             }
         } else {
-            echo "404 - Page non trouvée.";
+            http_response_code(404);
+            $content = "<h1>404 - Page non trouvée</h1>";
         }
+
+        // Appel le layout global en passant la variable $content
+        Layout::render($content);
+
     }
 }
