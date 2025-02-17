@@ -13,8 +13,8 @@ class HomeController
      */
     public function index()
     {
-        $title = "Accueil"; // Titre de la page
-        $page = "home"; // Nom de la page à charger
-        require_once __DIR__ . "/../Views/includes/layout.php";
+        ob_start();
+        require_once __DIR__ . '/../Views/pages/home.php';
+        return ob_get_clean();
     }
 }

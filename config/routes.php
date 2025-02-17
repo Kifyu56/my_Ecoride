@@ -1,9 +1,5 @@
 <?php
 
-// Assure le chargement des classes via Composer
-require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../src/Core/Router.php';
-
 use Src\Core\Router;
 
 // Création d'une instance du routeur
