@@ -1,9 +1,29 @@
 /* Container */
 .footer-container {
     width: 90%;
+    height: auto;
+    background: var(--dark-green);
+    padding: 20px 0;
+    text-align: center;
     max-width: 1200px;
     margin: 0 auto;
 }
+
+/* Footer Top */
+.footer-top {
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+/* contact-row */
+.contact-row {
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}   
 
 /* Contact Button */
 .contact-btn {

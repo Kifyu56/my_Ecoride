@@ -32,11 +32,11 @@ $content = $router->dispatch($uri);
         <?php require_once __DIR__ . "/../src/Views/includes/header.php"; ?>
     </header>
 
-    <main>
+    <main class="main">
         <?= $content ?>
     </main>
 
-    <footer>
+    <footer class="footer">
         <?php require_once __DIR__ . "/../src/Views/includes/footer.php"; ?>
     </footer>
 

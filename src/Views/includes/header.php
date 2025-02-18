@@ -5,7 +5,7 @@
     <!-- Logo Ecoride -->
     <img src="assets/images/header/logoEcoride.webp" alt="Logo EcoRide" class="logo">
 
-    <!-- Bouton Connexion/Déconnexion en haut à droite -->
+    <!-- Bouton Connexion/Déconnexion -->
     <div class="auth-button">
         <?php if (isset($_SESSION['user_id'])): ?>
             <a href="logout.php"><i class="fas fa-sign-out-alt"></i></a>

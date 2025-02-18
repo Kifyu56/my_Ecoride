@@ -3,7 +3,9 @@
 <div class="footer-container">
     <!-- Section Contact + Réseaux Sociaux -->
     <div class="footer-top">
-        <a href="contact" class="contact-btn">Contact</a>
+        <div class="contact-row">
+            <a href="contact" class="contact-btn">Contact</a>
+        </div>
         <div class="social-icons">
             <a href="#"><i class="fab fa-facebook"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>

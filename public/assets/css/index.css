@@ -1,6 +1,17 @@
 /* Import FontAwesome */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
+/* === Variables === */
+:root {
+    --dark-green: #325c3a;
+    --medium-green: #6A994E;
+    --light-green: #A7C957;
+    --beige: #F2E8CF;
+    --brown: #8B4513;
+    --black: #000000;
+    --white: #FFFFFF;
+}
+
 /* Reset général */
 * {
     margin: 0;
@@ -12,9 +23,7 @@
 body {
     width: 95%;
     max-width: 1200px;
-    /* Pour éviter un écran trop large sur desktop */
     margin: 0 auto;
-    /* Centre le body */
 }
 
 /* Header styles */
@@ -29,12 +38,144 @@ body {
     position: relative;
 }
 
-/* Footer Styles */
-footer {
-    width: 100%;
-    background: #2d572c;
-    color: white;
-    padding: 20px 0;
+/* === Bannière principale === */
+.banner {
+    width: 90%;
+    background-color: var(--dark-green);
+    color: var(--beige);
+    padding: 20px;
+    border-radius: 15px;
     text-align: center;
-    font-family: Arial, sans-serif;
+    font-weight: bold;
+    margin: auto;
+}
+
+.title-banner {
+    background-color: #F2E8CF;
+    width: 60%;
+    color: var(--brown);
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+}
+
+.content-banner {
+    background-color: #F2E8CF;
+    width: 95%;
+    color: var(--black);
+    font-size: 1.5rem;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* === Recherche de trajets === */
+.search-trips {
+    background-color: var(--medium-green);
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    margin: auto;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.title-search {
+    font-size: 1.8rem;
+    font-weight: bold;
+    background-color: #F2E8CF;
+    color: var(--brown);
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+/* === Champs du formulaire === */
+.search-trips input {
+    width: 90%;
+    max-width: 320px;
+    padding: 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: var(--beige);
+    color: var(--black);
+    text-align: center;
+}
+
+/* === Bouton Rechercher === */
+.search-trips button {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 12px 18px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+}
+
+.search-trips button:hover {
+    background-color: var(--brown);
+}
+
+/* Structure des sections réutilisables */
+.section-card {
+    width: 100%;
+    background-color: var(--beige);
+    padding: 15px;
+    border-radius: 15px;
+    margin: 15px auto;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* === Cartes vertes réutilisables (ex: Recherche, Avantages) === */
+.card-green {
+    width: 50%;
+    background-color: var(--medium-green);
+    color: var(--black);
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* === Boutons génériques === */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    transition: background 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--brown);
+    color: var(--beige);
+}
+
+.btn-primary:hover {
+    background-color: var(--medium-green);
+}
+
+
+
+@media screen and (min-width: 1024px) {
+    .section-card {
+        width: 80%;
+        /* Réduction de la largeur sur desktop */
+    }
 }
