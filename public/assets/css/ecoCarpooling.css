@@ -1,0 +1,56 @@
+/* === Liste des trajets === */
+.available-trips {
+    text-align: center;
+}
+
+.trip-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Style des cartes de trajet */
+.trip-card {
+    background-color: var(--beige);
+    color: var(--black);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Bouton Réserver */
+.btn-reserve {
+    background-color: var(--brown);
+    color: var(--beige);
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-reserve:hover {
+    background-color: var(--medium-green);
+}
+
+/* === Proposer un trajet === */
+.propose-trip {
+    text-align: center;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--brown);
+    color: var(--beige);
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--medium-green);
+}

@@ -18,7 +18,7 @@
     <nav class="nav-icons">
         <ul>
             <li><a href="home"><i class="fas fa-home"></i></a></li>
-            <li><a href="covoiturages.php"><i class="fas fa-car"></i></a></li>
+            <li><a href="ecoCarpooling"><i class="fas fa-car"></i></a></li>
             <li><a href="contact"><i class="fas fa-envelope"></i></a></li>
             <li><a href="about"><i class="fas fa-info-circle"></i></a></li>
             <?php if (isset($_SESSION['user_id'])): ?>
