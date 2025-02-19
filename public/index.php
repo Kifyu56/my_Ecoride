@@ -40,6 +40,9 @@ $content = $router->dispatch($uri);
         <?php require_once __DIR__ . "/../src/Views/includes/footer.php"; ?>
     </footer>
 
+    <?php include_once "../src/Views/modals/modals.php"; ?>
+    <script src="assets/js/index.js"></script>
+
 </body>
 
 </html>

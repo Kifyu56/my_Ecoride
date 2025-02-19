@@ -6,11 +6,17 @@
     <img src="assets/images/header/logoEcoride.webp" alt="Logo EcoRide" class="logo">
 
     <!-- Bouton Connexion/Déconnexion -->
-    <div class="auth-button">
+    <div class="auth-button" id="auth-button">
         <?php if (isset($_SESSION['user_id'])): ?>
-            <a href="logout.php"><i class="fas fa-sign-out-alt"></i></a>
+            <!-- Si connecté, afficher le bouton de déconnexion -->
+            <a href="#" data-open-modal="logout">
+                <i class="fas fa-sign-out-alt"></i> Se déconnecter
+            </a>
         <?php else: ?>
-            <a href="login.php"><i class="fas fa-sign-in-alt"></i></a>
+            <!-- Si non connecté, afficher le bouton de connexion -->
+            <a href="#" data-open-modal="login">
+                <i class="fas fa-sign-in-alt"></i> Se connecter
+            </a>
         <?php endif; ?>
     </div>
 
