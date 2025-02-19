@@ -12,7 +12,7 @@
 <section class="section-card">
     <div class="search-trips">
         <h2 class="title-search">Rechercher un trajet</h2>
-        <form action="covoiturage.php" method="GET">
+        <form action="ecoCarpooling" method="GET">
             <input type="text" name="departure" placeholder="Départ" required>
             <input type="text" name="arrival" placeholder="Arrivée" required>
             <input type="date" name="date">
