@@ -1,10 +1,10 @@
 <!-- Formulaire Connexion -->
-<form id="login" action="auth/login.php" method="POST">
-    <label for="email">Email :</label>
-    <input type="email" id="email" name="email" required>
+<form action="auth/login.php" method="POST">
+    <label for="login-username">Nom d'utilisateur</label>
+    <input type="text" id="login-username" name="username" required>
 
-    <label for="password">Mot de passe :</label>
-    <input type="password" id="password" name="password" required>
+    <label for="login-password">Mot de passe :</label>
+    <input type="password" id="login-password" name="password" required>
 
     <button type="submit" class="btn btn-primary">Se connecter</button>
 

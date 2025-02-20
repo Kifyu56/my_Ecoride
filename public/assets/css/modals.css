@@ -126,6 +126,21 @@
     border: 2px solid var(--dark-green);
 }
 
+
+/* ============================= */
+/* Style des erreurs dans les modals */
+/* ============================= */
+.input-error {
+    border: 2px solid red;
+}
+
+.error-text {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: block;
+}
+
 /* RESPONSIVE */
 @media screen and (max-width: 768px) {
     .modal-content {
