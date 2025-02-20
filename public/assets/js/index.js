@@ -1,16 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("JavaScript chargé !");
+    console.log("Le DOM est chargé !");
 
-    // Fonction pour ouvrir un modal
+    // Fonction pour ouvrir une modal
     function openModal(id) {
         console.log("Ouverture du modal:", id);
+        closeAllModals();
         const modal = document.getElementById(id);
         if (modal) {
             modal.style.display = "flex";
         }
     }
 
-    // Fonction pour fermer un modal
+    // Fonction pour fermer une modal
     function closeModal(id) {
         console.log("Fermeture du modal:", id);
         const modal = document.getElementById(id);
@@ -19,7 +20,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Ouvrir un modal quand on clique sur un bouton
+    // Fermer toutes les modals avant d'en ouvrir une autre
+    function closeAllModals() {
+        document.querySelectorAll(".modal").forEach(modal => {
+            modal.style.display = "none";
+        });
+    }
+
+    // Ouvrir une modal quand on clique sur un bouton
     document.querySelectorAll("[data-open-modal]").forEach(button => {
         console.log("Bouton détecté :", button);
         button.addEventListener("click", event => {
@@ -30,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Fermer un modal quand on clique sur le bouton de fermeture
+    // Fermer une modal quand on clique sur le bouton de fermeture
     document.querySelectorAll(".close").forEach(button => {
         button.addEventListener("click", function() {
             const modalId = this.getAttribute("data-modal");;
@@ -38,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Fermer le modal en cliquant en dehors
+    // Fermer la modal en cliquant en dehors
     window.addEventListener("click", event => {
         document.querySelectorAll(".modal").forEach(modal => {
             if (event.target === modal) {

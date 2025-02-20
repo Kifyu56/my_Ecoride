@@ -1,5 +1,5 @@
-<!-- Modal Connexion -->
-<form action="auth/login.php" method="POST">
+<!-- Formulaire Connexion -->
+<form id="login" action="auth/login.php" method="POST">
     <label for="email">Email :</label>
     <input type="email" id="email" name="email" required>
 
@@ -8,5 +8,5 @@
 
     <button type="submit" class="btn btn-primary">Se connecter</button>
 
-    <p>Pas encore de compte ? <a href="#" data-open-modal="registerModal">S'inscrire</a></p>
+    <p>Pas encore de compte ? <a href="#" data-open-modal="register">S'inscrire</a></p>
 </form>
